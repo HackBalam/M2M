@@ -1,24 +1,35 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import "react-native-get-random-values";
+import { useEffect, useState } from "react";
+import { Stack } from "expo-router";
+import { View, ActivityIndicator } from "react-native";
+import { initializeReownAppKit } from '../config/reownConfig';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const [isAppKitInitialized, setIsAppKitInitialized] = useState(false);
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+  useEffect(() => {
+    const initializeApp = async () => {
+      try {
+        // Initialize Reown AppKit once when app starts
+        await initializeReownAppKit();
+        setIsAppKitInitialized(true);
+      } catch (error) {
+        console.error('Failed to initialize AppKit:', error);
+        setIsAppKitInitialized(true); // Still show the app even if AppKit fails
+      }
+    };
+
+    initializeApp();
+  }, []);
+
+  // Show loading screen while AppKit initializes
+  if (!isAppKitInitialized) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#007AFF" />
+      </View>
+    );
+  }
+
+  return <Stack />;
 }
