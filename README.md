@@ -7,13 +7,16 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 1. Install dependencies
 
    ```bash
-   npm install
+   npx expo install @reown/appkit-ethers-react-native ethers
+   npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal@14.0.0-rc.1 @react-native-community/netinfo @walletconnect/react-native-compat expo-application
+   npm expo install @reown/appkit-auth-wagmi-react-native react-native-webview
+   npx expo install firebase
    ```
 
 2. Start the app
 
    ```bash
-   npx expo start
+   npx expo start:android
    ```
 
 In the output, you'll find options to open the app in a
