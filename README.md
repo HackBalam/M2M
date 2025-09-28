@@ -10,6 +10,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo install @reown/appkit-ethers-react-native ethers
    npx expo install @react-native-async-storage/async-storage react-native-get-random-values react-native-svg react-native-modal@14.0.0-rc.1 @react-native-community/netinfo @walletconnect/react-native-compat expo-application
    npm expo install @reown/appkit-auth-wagmi-react-native react-native-webview
+   npm install react-native-get-random-values
    npx expo install firebase
    ```
 
